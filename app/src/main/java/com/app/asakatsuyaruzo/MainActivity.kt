@@ -5,9 +5,9 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -15,6 +15,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.app.asakatsuyaruzo.ui.theme.AsakatsuYaruzoTheme
 
 class MainActivity : ComponentActivity() {
+    @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -24,7 +25,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Android")
+                    Scaffold(floatingActionButton={MainFloatingActionButton()}){}
                 }
             }
         }
@@ -36,20 +37,9 @@ fun Greeting(name: String) {
     Text(text = "Hello $name!", color= Color.Green)
 }
 
-@Preview(
-    uiMode = Configuration.UI_MODE_NIGHT_NO,
-    showBackground = true
-)
 @Composable
-fun DefaultPreview() {
-    Greeting("Andrdddoid")
-}
-
-@Preview(
-    uiMode = Configuration.UI_MODE_NIGHT_YES,
-    showBackground = true
-)
-@Composable
-fun DarkPreview() {
-    Greeting("Android")
+fun MainFloatingActionButton() {
+    FloatingActionButton(onClick = { /*do something*/ }) {
+        Icon(Icons.Filled.Add, contentDescription = "追加")
+    }
 }
