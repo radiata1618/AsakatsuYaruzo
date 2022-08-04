@@ -12,9 +12,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.app.asakatsuyaruzo.ui.theme.AsakatsuYaruzoTheme
 import com.app.asakatsuyaruzo.ui.theme.ViewAlarmPatternUI
 
@@ -34,7 +36,6 @@ fun MainScreenUI(){
 
         val navController = rememberNavController()//画面遷移のため
 
-
         // A surface container using the 'background' color from the theme
         Surface(
             modifier = Modifier.fillMaxSize(),
@@ -46,7 +47,15 @@ fun MainScreenUI(){
                 }
 
                 composable("addAlarmPatternUI") {
-                    AddAlarmPatternUI(1,navController)
+                    AddAlarmPatternUI(navController)
+                }
+
+                composable("setAlarmPatternUI/{patternId}",
+//                    arguments = listOf(
+//                        navArgument("patternId") { type = NavType.IntType }
+//                    )
+                ) { backStackEntry ->
+                    SetAlarmPatternUI(navController, backStackEntry.arguments?.getInt("patternId")!!)
                 }
             }
         }
