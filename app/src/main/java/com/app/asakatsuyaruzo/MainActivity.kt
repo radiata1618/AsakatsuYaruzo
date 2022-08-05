@@ -3,6 +3,7 @@ package com.app.asakatsuyaruzo
 import android.app.Application
 import android.content.res.Configuration
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -28,6 +29,9 @@ import com.app.asakatsuyaroze.data.AppDatabase
 import com.app.asakatsuyaruzo.ui.theme.AlarmPatternList
 import com.app.asakatsuyaruzo.ui.theme.AsakatsuYaruzoTheme
 import com.app.asakatsuyaruzo.ui.theme.ViewAlarmPatternUI
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
 
@@ -37,23 +41,21 @@ class MainActivity : ComponentActivity() {
         var mainAlarmPatternList = mutableStateListOf<AlarmPattern>()
     }
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         database = Room.databaseBuilder(
             applicationContext,
             AppDatabase::class.java,
-            "main-database"
+            "mainDatabase"
         ).build()
 
         alarmPatternDao = database.alarmPatternDao()
 
         alarmPatternDao.getAllLiveData().observe(this, Observer{
+            Log.d("■■■■■■■■■■■■■■■■■■■■■■■■aaa",it.size.toString())
             mainAlarmPatternList.clear()
             mainAlarmPatternList.addAll(it)
-            Toast.makeText(applicationContext, mainAlarmPatternList.size.toString()+"koko", Toast.LENGTH_LONG).show()
 //            AlarmPatternList(alarmPatternDataList = it, navController = navController)
         })
 
@@ -89,7 +91,7 @@ fun MainScreenUI(){
 //                        navArgument("patternId") { type = NavType.IntType }
 //                    )
                 ) { backStackEntry ->
-                    SetAlarmPatternUI(navController, backStackEntry.arguments?.getInt("patternId")!!)
+                    SetAlarmPatternUI(navController, backStackEntry.arguments?.getString("patternId")!!.toInt())
                 }
             }
         }

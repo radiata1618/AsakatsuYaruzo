@@ -1,6 +1,7 @@
 package com.app.asakatsuyaruzo
 
 import android.app.Application
+import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
@@ -77,7 +78,9 @@ fun AddAlarmPatternUI(
                             0,
                             false
                         )
+                        Log.d("■■■■■■■■■■■■■■■","■■■■■■■■■■■■■■■■■■■■■")
                         val alarmPatternId: Long = alarmPatternDao.insert(newAlarmPattern)
+                        Log.d("■■■■■■■■■■■■■■■", "■■■■■■■■■■■■■■■■■■■■■$alarmPatternId")
 
                         GlobalScope.launch(Dispatchers.Main) {
                             navController.navigate(

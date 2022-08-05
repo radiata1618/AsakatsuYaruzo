@@ -38,16 +38,6 @@ fun ViewAlarmPatternUI(navController: NavController) {
         AlarmPatternList(navController)
     }
 }
-//
-//private fun loadAlarmPatternDataList() {
-//    CoroutineScope(Dispatchers.Main).launch {
-//        withContext(Dispatchers.Default) {
-//            alarmPatternDao.getAll().forEach { todo ->
-//                alarmPatternDataList.add(todo)
-//            }
-//        }
-//    }
-//}
 
 @Composable
 fun AlarmPatternList(navController: NavController) {
