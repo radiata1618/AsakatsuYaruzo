@@ -1,5 +1,6 @@
 package com.app.asakatsuyaruzo.ui.theme
 
+import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.*
@@ -142,11 +143,35 @@ fun DayOfWeekButtons(alarmPattern: AlarmPattern) {
 
 @Composable
 fun DayOfWeekButtonUnit(dayName: String,alarmPattern: AlarmPattern) {
+    var buttonColor:Color
+    var buttonEnable:Boolean=false
+    when(dayName){
+        "monday" -> buttonEnable=alarmPattern.monday
+        "tuesday" -> buttonEnable=alarmPattern.tuesday
+        "wednesday" -> buttonEnable=alarmPattern.wednesday
+        "thursday" -> buttonEnable=alarmPattern.thursday
+        "friday" -> buttonEnable=alarmPattern.friday
+        "saturday" -> buttonEnable=alarmPattern.saturday
+        "sunday" -> buttonEnable=alarmPattern.sunday
+    }
+
+    Log.d("D/■■■■■■■■■■■■■■■■■■■■■■■■■AADDD",buttonEnable.toString())
+
+    if(buttonEnable){
+        buttonColor=Color.Red
+    }else{
+        buttonColor = Color.Gray
+
+    }
+
     Button(
         modifier = Modifier
             .size(30.dp, 30.dp)
             .padding(all = 0.dp),
         shape = RoundedCornerShape(100),
+        colors = ButtonDefaults.buttonColors(
+            containerColor = buttonColor
+        ),
         onClick = {
             var monday:Boolean?=alarmPattern.monday
             var tuesday:Boolean?=alarmPattern.tuesday

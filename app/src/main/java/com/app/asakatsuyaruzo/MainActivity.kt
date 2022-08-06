@@ -61,6 +61,10 @@ class MainActivity : ComponentActivity() {
         alarmPatternDao.getAllLiveData().observe(this, Observer{
             mainAlarmPatternList.clear()
             mainAlarmPatternList.addAll(it)
+            Log.d("■■■■■■■■■■■■■■■■■■■■■■■■■AA",it[0].monday.toString())
+            Log.d("■■■■■■■■■■■■■■■■■■■■■■■■■AA",it[0].tuesday.toString())
+            Log.d("■■■■■■■■■■■■■■■■■■■■■■■■■AA",it[0].wednesday.toString())
+            Log.d("■■■■■■■■■■■■■■■■■■■■■■■■■AA",it[0].thursday.toString())
 //            AlarmPatternList(alarmPatternDataList = it, navController = navController)
         })
 

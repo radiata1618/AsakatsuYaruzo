@@ -1,6 +1,7 @@
 package com.app.asakatsuyaroze.data
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.room.*
 
@@ -88,6 +89,7 @@ interface AlarmPatternDao {
             var friday: Boolean=fridayInput!!
             var saturday: Boolean=saturdayInput!!
             var sunday: Boolean=sundayInput!!
+            Log.d("■■■■■■■■AA■■■■■■■■AA", "SSSSS$monday")
         }
 
         update(AlarmPattern(
