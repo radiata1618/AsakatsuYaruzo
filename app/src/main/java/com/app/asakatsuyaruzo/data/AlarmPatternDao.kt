@@ -79,6 +79,15 @@ interface AlarmPatternDao {
 
         if(updatePattern=="patternName"){
             patternName=patternNameInput!!
+
+        }else if(updatePattern=="dayOfWeek"){
+            var monday: Boolean=mondayInput!!
+            var tuesday: Boolean=tuesdayInput!!
+            var wednesday: Boolean=wednesdayInput!!
+            var thursday: Boolean=thursdayInput!!
+            var friday: Boolean=fridayInput!!
+            var saturday: Boolean=saturdayInput!!
+            var sunday: Boolean=sundayInput!!
         }
 
         update(AlarmPattern(
