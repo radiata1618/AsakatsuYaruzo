@@ -12,6 +12,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -23,6 +24,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import androidx.room.Room
+import com.app.asakatsuyaroze.data.AlarmDao
 import com.app.asakatsuyaroze.data.AlarmPattern
 import com.app.asakatsuyaroze.data.AlarmPatternDao
 import com.app.asakatsuyaroze.data.AppDatabase
@@ -38,7 +40,10 @@ class MainActivity : ComponentActivity() {
     companion object {
         lateinit var database: AppDatabase
         lateinit var alarmPatternDao: AlarmPatternDao
+        lateinit var alarmDao: AlarmDao
         var mainAlarmPatternList = mutableStateListOf<AlarmPattern>()
+
+        lateinit var setAlarmPattern : AlarmPattern
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,9 +56,9 @@ class MainActivity : ComponentActivity() {
         ).build()
 
         alarmPatternDao = database.alarmPatternDao()
+        alarmDao = database.alarmDao()
 
         alarmPatternDao.getAllLiveData().observe(this, Observer{
-            Log.d("■■■■■■■■■■■■■■■■■■■■■■■■aaa",it.size.toString())
             mainAlarmPatternList.clear()
             mainAlarmPatternList.addAll(it)
 //            AlarmPatternList(alarmPatternDataList = it, navController = navController)
@@ -87,9 +92,7 @@ fun MainScreenUI(){
                 }
 
                 composable("setAlarmPatternUI/{patternId}",
-//                    arguments = listOf(
-//                        navArgument("patternId") { type = NavType.IntType }
-//                    )
+
                 ) { backStackEntry ->
                     SetAlarmPatternUI(navController, backStackEntry.arguments?.getString("patternId")!!.toInt())
                 }

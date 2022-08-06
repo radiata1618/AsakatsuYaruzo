@@ -7,13 +7,13 @@ import androidx.room.*
 @Dao
 interface AlarmPatternDao {
     @Insert
-    fun insert(alarmPattern : AlarmPattern):Long
+    fun insert(alarmPattern: AlarmPattern): Long
 
     @Update
-    fun update(alarmPattern : AlarmPattern)
+    fun update(alarmPattern: AlarmPattern)
 
-    @Delete
-    fun delete(alarmPattern : AlarmPattern)
+    @Query("delete from alarmPattern where id = :id")
+    fun delete(id: Int)
 
     @Query("delete from alarmPattern")
     fun deleteAll()
@@ -26,4 +26,74 @@ interface AlarmPatternDao {
 
     @Query("select * from alarmPattern where id = :id")
     fun getAlarmPattern(id: Int): AlarmPattern
+
+    fun insertDefault(patternName: String): Long {
+        val newAlarmPattern: AlarmPattern = AlarmPattern(
+            0,
+            patternName,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            0,
+            0,
+            false
+        )
+        val alarmPatternId: Long = insert(newAlarmPattern)
+        return alarmPatternId
+    }
+
+    fun updateDefault(
+        idInput: Int,
+        patternNameInput: String?,
+        mondayInput: Boolean?,
+        tuesdayInput: Boolean?,
+        wednesdayInput: Boolean?,
+        thursdayInput: Boolean?,
+        fridayInput: Boolean?,
+        saturdayInput: Boolean?,
+        sundayInput: Boolean?,
+        goToBedTimeHourInput: Int?,
+        goToBedTimeMinuteInput: Int?,
+        forceGoToBedEnableInput: Boolean?,
+        updatePattern:String
+    ) {
+
+        var alarmPattern: AlarmPattern = getAlarmPattern(idInput)
+
+        var id: Int=alarmPattern.id
+        var patternName: String=alarmPattern.patternName
+        var monday: Boolean=alarmPattern.monday
+        var tuesday: Boolean=alarmPattern.tuesday
+        var wednesday: Boolean=alarmPattern.wednesday
+        var thursday: Boolean=alarmPattern.thursday
+        var friday: Boolean=alarmPattern.friday
+        var saturday: Boolean=alarmPattern.saturday
+        var sunday: Boolean=alarmPattern.sunday
+        var goToBedTimeHour: Int=alarmPattern.goToBedTimeHour
+        var goToBedTimeMinute: Int=alarmPattern.goToBedTimeMinute
+        var forceGoToBedEnable: Boolean=alarmPattern.forceGoToBedEnable
+
+        if(updatePattern=="patternName"){
+            patternName=patternNameInput!!
+        }
+
+        update(AlarmPattern(
+            id,
+            patternName,
+            monday,
+            tuesday,
+            wednesday,
+            thursday,
+            friday,
+            saturday,
+            sunday,
+            goToBedTimeHour,
+            goToBedTimeMinute,
+            forceGoToBedEnable))
+
+    }
 }

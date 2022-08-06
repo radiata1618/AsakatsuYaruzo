@@ -2,6 +2,7 @@ package com.app.asakatsuyaruzo
 
 import android.app.Application
 import android.util.Log
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
@@ -9,6 +10,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -49,6 +51,16 @@ fun AddAlarmPatternUI(
                 onValueChange = { patternName = it },
                 modifier = Modifier.padding(20.dp),
                 singleLine = true,
+                decorationBox = {
+                    Box(
+//                        contentAlignment = Alignment.Center,
+                        modifier = Modifier
+                            .background(Color.LightGray)
+                            .padding(16.dp)
+                    ) {
+                        it()
+                    }
+                }
             )
             CommonSpaceBasicVertical()
             Button(
@@ -64,23 +76,8 @@ fun AddAlarmPatternUI(
                     val alarmPatternDao = database.alarmPatternDao()
 
                     GlobalScope.launch(Dispatchers.IO) {
-                        val newAlarmPattern: AlarmPattern = AlarmPattern(
-                            0,
-                            patternName,
-                            false,
-                            false,
-                            false,
-                            false,
-                            false,
-                            false,
-                            false,
-                            0,
-                            0,
-                            false
-                        )
-                        Log.d("■■■■■■■■■■■■■■■","■■■■■■■■■■■■■■■■■■■■■")
-                        val alarmPatternId: Long = alarmPatternDao.insert(newAlarmPattern)
-                        Log.d("■■■■■■■■■■■■■■■", "■■■■■■■■■■■■■■■■■■■■■$alarmPatternId")
+
+                        val alarmPatternId: Long = alarmPatternDao.insertDefault(patternName)
 
                         GlobalScope.launch(Dispatchers.Main) {
                             navController.navigate(
