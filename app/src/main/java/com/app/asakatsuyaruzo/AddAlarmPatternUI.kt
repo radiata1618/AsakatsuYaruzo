@@ -17,6 +17,7 @@ import androidx.navigation.NavController
 import androidx.room.Room
 import com.app.asakatsuyaroze.data.AlarmPattern
 import com.app.asakatsuyaroze.data.AppDatabase
+import com.app.asakatsuyaruzo.MainActivity.Companion.alarmPatternDao
 import com.app.asakatsuyaruzo.common.CommonSpaceBasicVertical
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -25,20 +26,16 @@ import kotlinx.coroutines.launch
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 fun AddAlarmPatternUI(
-//    index: Int,
     navController: NavController
 ) {
 
     Scaffold(
     ) {
-
         var patternName by rememberSaveable { mutableStateOf("") }
         val context = LocalContext.current
 
         Column(
             modifier = Modifier.fillMaxSize(),
-//            horizontalArrangement = Arrangement.Center,
-//            verticalAlignment = Alignment.Top,
         ) {
 
             CommonSpaceBasicVertical()
@@ -53,7 +50,6 @@ fun AddAlarmPatternUI(
                 singleLine = true,
                 decorationBox = {
                     Box(
-//                        contentAlignment = Alignment.Center,
                         modifier = Modifier
                             .background(Color.LightGray)
                             .padding(16.dp)
@@ -68,13 +64,6 @@ fun AddAlarmPatternUI(
                 shape = RoundedCornerShape(100), // こっちは角丸にしてくれるやつ
                 elevation = null, // これが影を消してくれる
                 onClick = {
-
-                    val database =
-                        Room.databaseBuilder(context, AppDatabase::class.java, "mainDatabase")
-                            .build()
-
-                    val alarmPatternDao = database.alarmPatternDao()
-
                     GlobalScope.launch(Dispatchers.IO) {
 
                         val alarmPatternId: Long = alarmPatternDao.insertDefault(patternName)

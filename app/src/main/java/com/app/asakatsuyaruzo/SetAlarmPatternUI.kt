@@ -105,8 +105,6 @@ fun SetAlarmPatternUI(
 
         Column(
             modifier = Modifier.fillMaxSize(),
-//            horizontalArrangement = Arrangement.Center,
-//            verticalAlignment = Alignment.CenterVertically,
         ) {
             CommonSpaceBasicVertical()
 
@@ -146,7 +144,7 @@ fun SetAlarmPatternUI(
                 Text(text = "朝活用アラーム設定")
             }
             CommonSpaceBasicVertical()
-            Button(
+            ElevatedButton(
                 modifier = Modifier.size(134.dp, 50.dp),
                 shape = RoundedCornerShape(100), // こっちは角丸にしてくれるやつ
                 elevation = null, // これが影を消してくれる
