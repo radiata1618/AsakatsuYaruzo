@@ -11,16 +11,23 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.app.asakatsuyaroze.data.AlarmPattern
+import com.app.asakatsuyaroze.data.defaultAlarmPattern
 import com.app.asakatsuyaruzo.MainActivity.Companion.alarmPatternDao
-import com.app.asakatsuyaruzo.MainActivity.Companion.mainAlarmPatternList
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import com.app.asakatsuyaruzo.common.CommonSpaceBasicVertical6
 import com.app.asakatsuyaruzo.CommonDayOfWeekButtons
 import kotlinx.coroutines.*
@@ -31,10 +38,18 @@ fun ViewAlarmPatternUI(navController: NavController) {
 
     var showDialog by remember { mutableStateOf(false) }
     var result by remember { mutableStateOf("Result") }
+    var mainAlarmPatternList = remember {mutableStateListOf<AlarmPattern>()}
+//        var mainAlarmPatternList = mutableStateListOf<AlarmPattern>()
+    val lifecycleOwner = LocalLifecycleOwner.current
 
     Scaffold(floatingActionButton = { MainFloatingActionButton(navController) }) {
 
-        AlarmPatternList(navController)
+        alarmPatternDao.getAllLiveData().observe(lifecycleOwner) {
+            mainAlarmPatternList.clear()
+            mainAlarmPatternList.addAll(it)
+        }
+
+        AlarmPatternList(navController,mainAlarmPatternList)
         if (showDialog) {
             AlertDialog(
                 onDismissRequest = {
@@ -73,7 +88,8 @@ fun ViewAlarmPatternUI(navController: NavController) {
 }
 
 @Composable
-fun AlarmPatternList(navController: NavController) {
+fun AlarmPatternList(navController: NavController,
+                     mainAlarmPatternList:List<AlarmPattern>) {
     LazyColumn {
         items(mainAlarmPatternList) { alarmPatternData ->
             AlarmPatternListUnit(

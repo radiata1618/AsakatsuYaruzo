@@ -26,8 +26,7 @@ class MainActivity : ComponentActivity() {
         lateinit var database: AppDatabase
         lateinit var alarmPatternDao: AlarmPatternDao
         lateinit var alarmDao: AlarmDao
-        var mainAlarmPatternList = mutableStateListOf<AlarmPattern>()
-//        var setAlarmPatternList = mutableStateListOf<AlarmPattern>()
+//        var mainAlarmPatternList = mutableStateListOf<AlarmPattern>()
 
     }
 
@@ -43,10 +42,6 @@ class MainActivity : ComponentActivity() {
         alarmPatternDao = database.alarmPatternDao()
         alarmDao = database.alarmDao()
 
-        alarmPatternDao.getAllLiveData().observe(this) {
-            mainAlarmPatternList.clear()
-            mainAlarmPatternList.addAll(it)
-        }
 
 
         setContent {
