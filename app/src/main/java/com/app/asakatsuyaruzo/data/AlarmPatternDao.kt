@@ -28,6 +28,9 @@ interface AlarmPatternDao {
     @Query("select * from alarmPattern where id = :id")
     fun getAlarmPattern(id: Int): AlarmPattern
 
+    @Query("select * from alarmPattern where id = :id")
+    fun getAlarmPatternLiveData(id: Int): LiveData<AlarmPattern>
+
     fun insertDefault(patternName: String): Long {
         val newAlarmPattern: AlarmPattern = AlarmPattern(
             0,
@@ -62,7 +65,6 @@ interface AlarmPatternDao {
         forceGoToBedEnableInput: Boolean?,
         updatePattern:String
     ) {
-
         var alarmPattern: AlarmPattern = getAlarmPattern(idInput)
 
         var id: Int=alarmPattern.id
@@ -82,13 +84,13 @@ interface AlarmPatternDao {
             patternName=patternNameInput!!
 
         }else if(updatePattern=="dayOfWeek"){
-            var monday: Boolean=mondayInput!!
-            var tuesday: Boolean=tuesdayInput!!
-            var wednesday: Boolean=wednesdayInput!!
-            var thursday: Boolean=thursdayInput!!
-            var friday: Boolean=fridayInput!!
-            var saturday: Boolean=saturdayInput!!
-            var sunday: Boolean=sundayInput!!
+            monday=mondayInput!!
+            tuesday=tuesdayInput!!
+            wednesday=wednesdayInput!!
+            thursday=thursdayInput!!
+            friday=fridayInput!!
+            saturday=saturdayInput!!
+            sunday=sundayInput!!
             Log.d("■■■■■■■■AA■■■■■■■■AA", "SSSSS$monday")
         }
 

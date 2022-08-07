@@ -9,14 +9,12 @@ import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.room.Room
-import com.app.asakatsuyaroze.data.Alarm
 import com.app.asakatsuyaroze.data.AlarmPattern
 import com.app.asakatsuyaroze.data.AppDatabase
 import com.app.asakatsuyaruzo.MainActivity.Companion.alarmDao
@@ -26,7 +24,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.util.*
-import kotlin.math.log
+import androidx.compose.runtime.*
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.platform.LocalLifecycleOwner
+import com.app.asakatsuyaroze.data.defaultAlarmPattern
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
@@ -42,17 +46,22 @@ fun SetAlarmPatternUI(
         var alarmType1minute by rememberSaveable { mutableStateOf("") }
         var alarmType2hour by rememberSaveable { mutableStateOf("") }
         var alarmType2minute by rememberSaveable { mutableStateOf("") }
+        var alarmPatternData by rememberSaveable { mutableStateOf(defaultAlarmPattern()) }
         val context = LocalContext.current
+        val lifecycleOwner = LocalLifecycleOwner.current
         var mHour:Int=0
         var mMinute:Int=0
         val mCalendar = Calendar.getInstance()
 
         var showDialog by remember { mutableStateOf(false) }
         var result by remember { mutableStateOf("Result") }
-        LaunchedEffect(Unit) {
+
+
+        alarmPatternDao.getAlarmPatternLiveData(patternId).observe(lifecycleOwner) {
+
             GlobalScope.launch(Dispatchers.IO) {
-                var alarmPatternInitial = alarmPatternDao.getAlarmPattern(patternId)
-                patternName = alarmPatternInitial.patternName
+                alarmPatternData = it
+                patternName = alarmPatternData.patternName
 
                 var alarmDataType1List = alarmDao.getAlarmByPatternIdType1(patternId)
                 var alarmDataType2List = alarmDao.getAlarmByPatternIdType2(patternId)
@@ -70,6 +79,7 @@ fun SetAlarmPatternUI(
                     mMinute=alarmDataType2List[0].minute
                 }
             }
+
         }
 
         // Value for storing time as a string
@@ -116,6 +126,9 @@ fun SetAlarmPatternUI(
                     }
                 }
             )
+            CommonSpaceBasicVertical()
+
+            CommonDayOfWeekButtons(alarmPatternData)
 
             CommonSpaceBasicVertical()
             Text(text = "最初のアラーム")
@@ -138,12 +151,6 @@ fun SetAlarmPatternUI(
                 shape = RoundedCornerShape(100), // こっちは角丸にしてくれるやつ
                 elevation = null, // これが影を消してくれる
                 onClick = {
-
-                    val database =
-                        Room.databaseBuilder(context, AppDatabase::class.java, "mainDatabase")
-                            .build()
-
-                    val alarmPatternDao = database.alarmPatternDao()
 
                     GlobalScope.launch(Dispatchers.IO) {
 

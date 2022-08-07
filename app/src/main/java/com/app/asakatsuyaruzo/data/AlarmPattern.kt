@@ -1,9 +1,11 @@
 package com.app.asakatsuyaroze.data
 
+import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlinx.parcelize.Parcelize
 
-
+@Parcelize
 @Entity(tableName = "alarmPattern")
 data class AlarmPattern (
     @PrimaryKey(autoGenerate = true) val id: Int,
@@ -18,4 +20,21 @@ data class AlarmPattern (
     val goToBedTimeHour: Int,
     val goToBedTimeMinute: Int,
     val forceGoToBedEnable: Boolean,
-)
+): Parcelable
+
+
+fun defaultAlarmPattern():AlarmPattern{
+    return AlarmPattern(0,
+        "",
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        0,
+        0,
+        false
+    )
+}
