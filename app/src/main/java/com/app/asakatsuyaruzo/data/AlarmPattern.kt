@@ -22,7 +22,6 @@ data class AlarmPattern (
     val forceGoToBedEnable: Boolean,
 ): Parcelable
 
-
 fun defaultAlarmPattern():AlarmPattern{
     return AlarmPattern(0,
         "",
@@ -38,3 +37,4 @@ fun defaultAlarmPattern():AlarmPattern{
         false
     )
 }
+

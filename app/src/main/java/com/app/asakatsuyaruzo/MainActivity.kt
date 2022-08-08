@@ -6,14 +6,12 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.ui.Modifier
-import androidx.lifecycle.Observer
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.room.Room
-import com.app.asakatsuyaroze.data.AlarmDao
+import com.app.asakatsuyaruzo.data.AlarmDao
 import com.app.asakatsuyaroze.data.AlarmPattern
 import com.app.asakatsuyaroze.data.AlarmPatternDao
 import com.app.asakatsuyaroze.data.AppDatabase

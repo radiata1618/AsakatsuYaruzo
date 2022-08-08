@@ -39,6 +39,7 @@ fun SetAlarmPatternUI(
     patternId: Int
 ) {
     Scaffold(
+        modifier=Modifier.padding(all=16.dp)
     ) {
 
         var patternName by rememberSaveable { mutableStateOf("") }

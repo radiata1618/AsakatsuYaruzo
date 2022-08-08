@@ -4,6 +4,9 @@ import android.app.Application
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.app.asakatsuyaruzo.MainActivity.Companion.alarmDao
+import com.app.asakatsuyaruzo.data.AlarmDao
+import com.app.asakatsuyaruzo.data.refleshNextDate
 
 @Dao
 interface AlarmPatternDao {
@@ -46,8 +49,7 @@ interface AlarmPatternDao {
             0,
             false
         )
-        val alarmPatternId: Long = insert(newAlarmPattern)
-        return alarmPatternId
+        return insert(newAlarmPattern)
     }
 
     fun updateDefault(
@@ -66,7 +68,6 @@ interface AlarmPatternDao {
         updatePattern:String
     ) {
         var alarmPattern: AlarmPattern = getAlarmPattern(idInput)
-
         var id: Int=alarmPattern.id
         var patternName: String=alarmPattern.patternName
         var monday: Boolean=alarmPattern.monday
@@ -91,7 +92,6 @@ interface AlarmPatternDao {
             friday=fridayInput!!
             saturday=saturdayInput!!
             sunday=sundayInput!!
-            Log.d("■■■■■■■■AA■■■■■■■■AA", "SSSSS$monday")
         }
 
         update(AlarmPattern(
@@ -108,5 +108,15 @@ interface AlarmPatternDao {
             goToBedTimeMinute,
             forceGoToBedEnable))
 
+        refleshNextDateByPatternId(id)
     }
+}
+
+fun refleshNextDateByPatternId(patternId:Int){
+    var alarmDataList:List<Alarm> = alarmDao.getAlarmByPatternId(patternId)
+
+    for(i in alarmDataList.indices){
+        refleshNextDate(alarmDataList[i].id)
+    }
+
 }
