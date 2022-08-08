@@ -139,3 +139,12 @@ fun refleshNextDate(id:Int){
     ))
 
 }
+
+fun getNextDateTimeAlarm ():Alarm?{
+    var alarmListOrderByNextDateList = alarmDao.getAlarmListOrderByNextDate()
+    if(alarmListOrderByNextDateList[0].nextDateInLong==null){
+        return null
+    }else{
+        return alarmListOrderByNextDateList[0]
+    }
+}

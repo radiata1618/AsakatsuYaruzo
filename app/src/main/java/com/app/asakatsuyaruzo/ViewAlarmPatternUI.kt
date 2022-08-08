@@ -32,6 +32,7 @@ import androidx.compose.ui.platform.LocalLifecycleOwner
 import com.app.asakatsuyaruzo.common.CommonSpaceBasicVertical6
 import com.app.asakatsuyaruzo.CommonDayOfWeekButtons
 import com.app.asakatsuyaruzo.MainActivity.Companion.alarmDao
+import com.app.asakatsuyaruzo.data.getNextDateTimeAlarm
 import kotlinx.coroutines.*
 import java.util.*
 
@@ -52,12 +53,12 @@ fun ViewAlarmPatternUI(navController: NavController) {
             mainAlarmPatternList.addAll(it)
 
             GlobalScope.launch(Dispatchers.IO) {
-                var alarmListOrderByNextDate = alarmDao.getAlarmListOrderByNextDate()
-                if(alarmListOrderByNextDate[0].nextDateInLong==null){
+                var alarmNextDate = getNextDateTimeAlarm()
+                if(alarmNextDate==null){
                     nextTimeLong = 0
                     nextTimeText= ""
                 }else{
-                    nextTimeLong = alarmListOrderByNextDate[0].nextDateInLong!!
+                    nextTimeLong = alarmNextDate.nextDateInLong!!
                     var calendar = Calendar.getInstance()
                     calendar.setTimeInMillis(nextTimeLong)
                     nextTimeText= SimpleDateFormat("yyyy年MM月dd日 HH:mm").format(calendar.getTime())
