@@ -172,6 +172,7 @@ fun SetAlarmPatternUI(
 
                         showDialog = true
 
+                        Log.d("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■","SetAlarmPatternUIの中のScheduleAlarm")
                         scheduleAlarm(context)
                         GlobalScope.launch(Dispatchers.Main) {
                             navController.navigateUp()

@@ -32,18 +32,23 @@ fun scheduleAlarm(context: Context): Boolean {
 //    pendingIntent.cancel();
 //    alarmManagerCancel.cancel(pendingIntent);
 
+    Log.d("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■","GlobalScope.launchに入る前")
 
     //アラーム再設定
     GlobalScope.launch(Dispatchers.IO) {
         val intent = Intent(context, AlarmBroadcastReceiver::class.java)
         var nextAlarm: Alarm? = getNextDateTimeAlarm()
+
         if(nextAlarm==null){
 
+            Log.d("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■","nextAlarmはNullだった")
         }else{
+            Log.d("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■","nextAlarmはNullじゃなかった")
             //TODO PendingIntent.FLAG_CANCEL_CURRENTでキャンセルも一気にできるようにしたいが、複数FLG設定はどうやるのか？
             val pendingIntent = PendingIntent.getBroadcast(
                 context, 0, intent, PendingIntent.FLAG_IMMUTABLE)
 
+            Log.d("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■","nextAlarmはNullじゃなかった２")
                 val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, nextAlarm!!.nextDateInLong!!, pendingIntent)
@@ -51,6 +56,7 @@ fun scheduleAlarm(context: Context): Boolean {
                 alarmManager.setExact(AlarmManager.RTC_WAKEUP, nextAlarm!!.nextDateInLong!!, pendingIntent)
             }
 
+            Log.d("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■","nextAlarmはNullじゃなかった３")
             var calendar = Calendar.getInstance()
             calendar.setTimeInMillis(nextAlarm!!.nextDateInLong!!)
             var nextTimeText= SimpleDateFormat("yyyy年MM月dd日 HH:mm").format(calendar.getTime())

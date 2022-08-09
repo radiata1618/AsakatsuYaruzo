@@ -1,5 +1,6 @@
 package com.app.asakatsuyaruzo
 
+import android.util.Log
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
@@ -101,6 +102,7 @@ fun DayOfWeekButtonUnit(dayName: String,alarmPattern: AlarmPattern) {
                             "dayOfWeek",
                         )
 
+                        Log.d("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■","CommonDayOfWeekButtonsUIの中のScheduleAlarm")
                         scheduleAlarm(context)
                     }
                 }
