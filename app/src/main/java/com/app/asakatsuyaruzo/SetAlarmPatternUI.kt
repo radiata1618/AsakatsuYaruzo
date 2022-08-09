@@ -169,8 +169,10 @@ fun SetAlarmPatternUI(
                             "patternName"
                         )
 
+
                         showDialog = true
 
+                        scheduleAlarm(context)
                         GlobalScope.launch(Dispatchers.Main) {
                             navController.navigateUp()
                         }
