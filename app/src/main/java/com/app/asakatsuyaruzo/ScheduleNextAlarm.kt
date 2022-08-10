@@ -46,7 +46,8 @@ fun scheduleAlarm(context: Context): Boolean {
             Log.d("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■","nextAlarmはNullじゃなかった")
             //TODO PendingIntent.FLAG_CANCEL_CURRENTでキャンセルも一気にできるようにしたいが、複数FLG設定はどうやるのか？
             val pendingIntent = PendingIntent.getBroadcast(
-                context, 0, intent, PendingIntent.FLAG_IMMUTABLE)
+                context, 0, intent,
+                PendingIntent.FLAG_CANCEL_CURRENT or PendingIntent.FLAG_IMMUTABLE)
 
             Log.d("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■","nextAlarmはNullじゃなかった２")
                 val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager

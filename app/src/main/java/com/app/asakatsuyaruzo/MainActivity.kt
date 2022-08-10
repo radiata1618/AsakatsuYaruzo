@@ -16,7 +16,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.room.Room
 import com.app.asakatsuyaruzo.data.AlarmDao
-import com.app.asakatsuyaroze.data.AlarmPattern
 import com.app.asakatsuyaroze.data.AlarmPatternDao
 import com.app.asakatsuyaroze.data.AppDatabase
 import com.app.asakatsuyaruzo.ui.theme.AsakatsuYaruzoTheme

@@ -1,7 +1,5 @@
 package com.app.asakatsuyaruzo
 
-import android.app.Application
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -14,9 +12,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import androidx.room.Room
-import com.app.asakatsuyaroze.data.AlarmPattern
-import com.app.asakatsuyaroze.data.AppDatabase
 import com.app.asakatsuyaruzo.MainActivity.Companion.alarmPatternDao
 import com.app.asakatsuyaruzo.common.CommonSpaceBasicVertical
 import kotlinx.coroutines.Dispatchers

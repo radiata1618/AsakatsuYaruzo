@@ -14,9 +14,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import androidx.room.Room
-import com.app.asakatsuyaroze.data.AlarmPattern
-import com.app.asakatsuyaroze.data.AppDatabase
 import com.app.asakatsuyaruzo.MainActivity.Companion.alarmDao
 import com.app.asakatsuyaruzo.MainActivity.Companion.alarmPatternDao
 import com.app.asakatsuyaruzo.common.CommonSpaceBasicVertical
@@ -24,13 +21,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.util.*
-import androidx.compose.runtime.*
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalLifecycleOwner
-import com.app.asakatsuyaroze.data.defaultAlarmPattern
+import com.app.asakatsuyaruzo.data.defaultAlarmPattern
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)

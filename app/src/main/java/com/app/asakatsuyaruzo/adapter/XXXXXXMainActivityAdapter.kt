@@ -8,7 +8,7 @@
 //import androidx.recyclerview.widget.RecyclerView
 //import com.app.asakatsuyaroze.R
 //import com.app.asakatsuyaroze.SetAlarmPattern
-//import com.app.asakatsuyaroze.data.AlarmPattern
+//import com.app.asakatsuyaruzo.data.AlarmPattern
 //import com.app.asakatsuyaroze.databinding.AlarmpatternRowBinding
 //
 //class MainActivityViewHolder(var binding: AlarmpatternRowBinding) : RecyclerView.ViewHolder(binding.root)

@@ -3,7 +3,6 @@ package com.app.asakatsuyaruzo.data
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.app.asakatsuyaroze.data.Alarm
-import com.app.asakatsuyaroze.data.AlarmPattern
 import com.app.asakatsuyaruzo.MainActivity.Companion.alarmDao
 import com.app.asakatsuyaruzo.MainActivity.Companion.alarmPatternDao
 import java.util.*

@@ -5,9 +5,9 @@
 //import androidx.lifecycle.AndroidViewModel
 //import androidx.lifecycle.MutableLiveData
 //import androidx.room.Room
-//import com.app.asakatsuyaroze.data.AlarmPattern
+//import com.app.asakatsuyaruzo.data.AlarmPattern
 //import com.app.asakatsuyaroze.data.AppDatabase
-//import com.app.asakatsuyaroze.data.defaultAlarmPattern
+//import com.app.asakatsuyaruzo.data.defaultAlarmPattern
 //import com.app.asakatsuyaruzo.MainActivity.Companion.alarmPatternDao
 //import kotlinx.coroutines.Dispatchers
 //import kotlinx.coroutines.GlobalScope

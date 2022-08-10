@@ -1,4 +1,4 @@
-package com.app.asakatsuyaroze.data
+package com.app.asakatsuyaruzo.data
 
 import android.os.Parcelable
 import androidx.room.Entity
@@ -22,7 +22,7 @@ data class AlarmPattern (
     val forceGoToBedEnable: Boolean,
 ): Parcelable
 
-fun defaultAlarmPattern():AlarmPattern{
+fun defaultAlarmPattern(): AlarmPattern {
     return AlarmPattern(0,
         "",
         false,

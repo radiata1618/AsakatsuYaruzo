@@ -1,11 +1,9 @@
 package com.app.asakatsuyaroze.data
 
-import android.app.Application
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.app.asakatsuyaruzo.MainActivity.Companion.alarmDao
-import com.app.asakatsuyaruzo.data.AlarmDao
+import com.app.asakatsuyaruzo.data.AlarmPattern
 import com.app.asakatsuyaruzo.data.refleshNextDate
 
 @Dao
@@ -94,7 +92,8 @@ interface AlarmPatternDao {
             sunday=sundayInput!!
         }
 
-        update(AlarmPattern(
+        update(
+            AlarmPattern(
             id,
             patternName,
             monday,
@@ -106,7 +105,8 @@ interface AlarmPatternDao {
             sunday,
             goToBedTimeHour,
             goToBedTimeMinute,
-            forceGoToBedEnable))
+            forceGoToBedEnable)
+        )
 
         refleshNextDateByPatternId(id)
     }

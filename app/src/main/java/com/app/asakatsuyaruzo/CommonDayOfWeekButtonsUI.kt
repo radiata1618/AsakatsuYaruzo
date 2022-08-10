@@ -3,13 +3,9 @@ package com.app.asakatsuyaruzo
 import android.util.Log
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.selection.toggleable
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -20,7 +16,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.app.asakatsuyaroze.data.AlarmPattern
+import com.app.asakatsuyaruzo.data.AlarmPattern
 import com.app.asakatsuyaruzo.common.CommonSpaceBasicHorizontal6
 import com.app.asakatsuyaruzo.ui.theme.*
 import kotlinx.coroutines.Dispatchers
